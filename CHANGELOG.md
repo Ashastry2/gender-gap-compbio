@@ -54,6 +54,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **arXiv data fetching** (`src/arxiv_fetcher.py` and `run_arxiv_fetch.py`)
   - arXiv API rate limiting prevented reliable data collection
   - PubMed sample size (410k+ papers) sufficient for analysis
+- **Legacy and non-reproducible code (reproducibility audit):**
+  - `pipeline.py` — deprecated monolithic script, superseded by `cli.py`
+  - `src/arxiv_fetcher.py` — unused in PubMed-only analysis, removed from exports
+  - `generate_gender_classification_figures.py` — used hardcoded statistics instead of reading from database
+  - Dead genderize.io code from `src/gender_utils.py` — never used in actual pipeline (Groq LLM is Tier 2)
+
+### Fixed
+- **Reproducibility:** Critical filename mismatch in `run_gender_inference_db.py`
+  - Changed hardcoded `2015_2024.csv` to `2015_2025.csv` to match `cli.py` output
+  - Pipeline would have failed at step 2 (database population) with "file not found" error
+- **Documentation:** Updated README to document LLM classification pipeline and Groq API key requirement
+  - Added two-phase gender inference explanation
+  - Clarified that Groq API is optional but recommended for full reproducibility (~$0.54 cost)
 
 ---
 
