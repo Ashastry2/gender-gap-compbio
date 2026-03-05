@@ -148,7 +148,7 @@ We're not done. But we're moving in the right direction.
 
 ## How We Did This
 
-We analyzed **1.76 million author-position records** from **274,702 PubMed publications** (2015–2025) across both Biology and Computational Biology datasets, utilizing **977,731 unique authors**. Gender classification employed our hybrid three-layer approach: offline gender databases, API-based inference, and LLM-based classification (Groq llama-3.1-8b-instant) for unknowns, achieving 99.1% overall coverage with 98.4% classification rate for previously unknown names. We excluded initial-first names (6.2%) to improve classification reliability, resulting in a filtered analytical dataset of 916,828 authors.
+We analyzed **1.76 million author-position records** from **274,702 PubMed publications** (2015–2025) across both Biology and Computational Biology datasets, utilizing **977,731 unique authors**. Gender classification employed our hybrid three-layer approach: offline gender databases, API-based inference, and LLM-based classification (Groq llama-3.1-8b-instant) for unknowns, achieving 99.1% overall coverage with 98.4% classification rate for previously unknown names. We excluded ambiguous initial names (6.4%, including simple, hyphenated, and punctuated initials) to improve classification reliability, resulting in a filtered analytical dataset of 915,314 authors.
 
 Each publication was mapped to a journal impact quartile using **ScimagoJR rankings** via fuzzy string matching (85.7% success rate). Female representation (P_female) for each quartile-position combination was estimated using **bootstrap resampling** with 1,000 iterations per group, with 95% confidence intervals calculated as the 2.5th and 97.5th percentiles.
 
