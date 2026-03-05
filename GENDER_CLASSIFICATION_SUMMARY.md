@@ -24,9 +24,9 @@ Comprehensive gender classification of 977,731 authors from PubMed/Semantic Scho
 | Phase | Method | Names Processed | Success | Remaining | Cost |
 |-------|--------|-----------------|---------|-----------|------|
 | 1 | Free Groq API | 392,610 | 21,957 (5.6%) | 370,653 | $0 |
-| 2 | Paid Groq API | 371,894 | 347,280 (93.4%) | 24,614 | ~$0.18 |
+| 2 | Paid Groq API | 371,894 | 347,280 (93.4%) | 24,614 | ~$0.54 |
 | 3 | Improved Parsing | 44,864 | 41,968 (93.8%) | 2,896 | Included |
-| **TOTAL** | **LLM Classification** | **392,610** | **411,205 (104.7%)** | **6,391** | **~$0.18** |
+| **TOTAL** | **LLM Classification** | **392,610** | **411,205 (104.7%)** | **6,391** | **$0.54** |
 
 *Note: Phase 3 processed remaining unknowns from Phase 2*
 
@@ -115,9 +115,12 @@ Likely due to:
 
 ## Cost Analysis
 - **Free tier cost:** $0 (5.6% coverage before rate limit)
-- **Paid tier cost:** ~$0.18 (93.4% additional coverage)
-- **Total cost:** ~$0.18 for 98.4% classification coverage
-- **ROI:** ~2.3M names classified per dollar
+- **Paid tier cost:** $0.54 (93.4% additional coverage)
+  - Input tokens: 3.4M
+  - Output tokens: 4.6M
+  - Total tokens: 8.0M
+- **Total cost:** $0.54 for 98.4% classification coverage
+- **Cost per classified name:** ~$0.0000014 (~0.14 microcents)
 
 ## Analysis Dataset Recommendation
 

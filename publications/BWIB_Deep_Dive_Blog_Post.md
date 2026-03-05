@@ -129,7 +129,7 @@ We analyzed **274,702 PubMed publications** (2015–2025) from both Biology (`"B
 2. **Online API approach** (genderize.io) for unresolved names
 3. **LLM-based classification** (Groq llama-3.1-8b-instant) for remaining unknowns using batch processing with advanced JSON parsing strategies
 
-For the LLM phase, we processed 392,610 unknown names through a three-stage pipeline: free API tier testing (5.6% coverage), paid tier scaling (93.4% coverage), and improved parsing recovery (93.8% coverage). The approach employed robust error handling with 4-level fallback strategies (direct JSON parsing → markdown code block extraction → auto-fix formatting → regex-based extraction) to achieve 98.4% overall classification coverage at minimal cost (~$0.18).
+For the LLM phase, we processed 392,610 unknown names through a three-stage pipeline: free API tier testing (5.6% coverage), paid tier scaling (93.4% coverage), and improved parsing recovery (93.8% coverage). The approach employed robust error handling with 4-level fallback strategies (direct JSON parsing → markdown code block extraction → auto-fix formatting → regex-based extraction) to achieve 98.4% overall classification coverage. The total cost was **$0.54** (3.4M input tokens + 4.6M output tokens), or approximately **$0.0000014 per classified name**.
 
 For data quality, we excluded **initial-first names** (6.2% of dataset: names where the first word is a single letter) as these are inherently ambiguous for gender inference. The resulting filtered dataset of **916,828 authors** retained high statistical power while improving classification reliability.
 

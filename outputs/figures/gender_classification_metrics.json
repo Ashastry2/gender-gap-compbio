@@ -28,7 +28,12 @@
     "successfully_classified": 386219,
     "success_rate_pct": 98.4,
     "remaining_ambiguous": 6391,
-    "total_cost_usd": 0.18
+    "total_cost_usd": 0.54,
+    "token_usage": {
+      "input_tokens": 3400000,
+      "output_tokens": 4600000,
+      "total_tokens": 8000000
+    }
   },
   "three_stage_approach": {
     "stage_1_free_tier": {
@@ -46,7 +51,12 @@
       "classified": 347280,
       "success_rate_pct": 93.4,
       "remaining": 24614,
-      "cost": 0.18,
+      "cost": 0.54,
+      "token_usage": {
+        "input_tokens": 3400000,
+        "output_tokens": 4600000,
+        "total_tokens": 8000000
+      },
       "notes": "Used standard JSON parsing with markdown extraction fallback"
     },
     "stage_3_improved_parsing": {
@@ -95,11 +105,15 @@
   },
   "cost_analysis": {
     "free_tier_cost": 0.0,
-    "paid_tier_cost": 0.18,
-    "total_cost_usd": 0.18,
-    "names_per_dollar": 2143441,
-    "cost_per_name_usd": 0.000000466,
-    "cost_per_name_microcents": 0.0466
+    "paid_tier_cost": 0.54,
+    "total_cost_usd": 0.54,
+    "input_tokens_3_4m": true,
+    "output_tokens_4_6m": true,
+    "total_tokens_8m": true,
+    "names_per_dollar": 714852,
+    "cost_per_name_usd": 0.0000014,
+    "cost_per_name_microcents": 0.14,
+    "notes": "Actual cost from Groq dashboard; includes all three phases with token counts for reference"
   },
   "examples_successfully_classified": {
     "international_names": [
