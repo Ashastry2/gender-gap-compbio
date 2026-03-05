@@ -138,7 +138,7 @@ python run_gender_inference_db.py
 This script:
 1. Loads paper data from CSV files
 2. Identifies unique authors
-3. Infers gender using a two-layer strategy (gender-guesser + genderize.io API)
+3. Infers gender using a two-tier strategy (offline gender-guesser database + Groq LLM API)
 4. Populates SQLite database at `data/gender_data.db`
 
 #### Journal Impact Analysis (separate analysis)
@@ -212,11 +212,10 @@ Similarly, ScimagoJR journal rankings are cached in the `journals` table after t
 
 ### Gender Inference Strategy
 
-A layered approach to maximize coverage while minimizing API calls:
+A tiered approach to maximize classification coverage while managing computational costs:
 
-1. **Layer 1 — gender-guesser (offline):** Fast, offline database of ~45k names. Returns male, female, mostly_male, mostly_female, or unknown.
-2. **Layer 2 — genderize.io API (fallback):** For names not resolved by gender-guesser, queries the genderize.io API (up to 1k/day free).
-3. **Caching:** All lookups are cached in `data/gender_cache.json` to avoid redundant API calls.
+1. **Tier 1 — gender-guesser (offline):** Fast, offline database of ~45k names for initial gender classification.
+2. **Tier 2 — Groq LLM API (fallback):** For names not resolved by gender-guesser, uses advanced LLM-based classification with Groq API (llama-3.1-8b-instant) with three-phase processing (free tier exploration, paid tier production, parsing refinement).
 
 **Probability Assignment:**
 - `P_female = 1.0` for confirmed female names
@@ -319,7 +318,7 @@ These limitations are explicitly documented and should be transparently reported
 - Mihaljević H & Santamaría L (2021). Comparison and benchmark of name-to-gender inference services. *PeerJ Comput Sci* 7:e156. https://doi.org/10.7717/peerj-cs.156
 - NCBI E-utilities API: https://www.ncbi.nlm.nih.gov/books/NBK25499/
 - gender-guesser: https://pypi.org/project/gender-guesser/
-- genderize.io: https://genderize.io
+- Groq API: https://console.groq.com/docs/api
 
 ## Contributing
 

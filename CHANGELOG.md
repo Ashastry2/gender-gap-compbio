@@ -88,7 +88,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Repository structure with src/, data/, notebooks/, outputs/
   - PubMed data fetcher (`src/pubmed_fetcher.py`)
   - arXiv data fetcher (`src/arxiv_fetcher.py`)
-  - Gender inference engine (`src/gender_utils.py`) with genderize.io API integration
+  - Gender inference engine with offline database and Groq LLM API
   - Bootstrap statistical analysis module (`src/bootstrap.py`)
   - Plotting utilities (`src/plotting.py`)
   - Jupyter notebook-based pipeline (notebooks/01-05)
@@ -100,9 +100,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Exclusion filters: reviews, comments, editorials, non-English papers
 
 - **Gender Inference**
-  - Two-layer approach: gender-guesser (offline) + genderize.io API (fallback)
-  - Caching system to minimize API calls
-  - Probability-based assignment for uncertain cases
+  - Two-tier approach: gender-guesser (offline) + Groq LLM API (fallback)
+  - Three-phase LLM processing with robust JSON parsing fallback strategies
+  - 98.4% classification coverage on unresolved names
 
 - **Author Position Classification**
   - Position-based analysis: first, second, middle, penultimate, last

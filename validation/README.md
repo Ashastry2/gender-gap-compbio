@@ -6,7 +6,7 @@ This folder documents the validation of gender inference methodology for the gen
 
 ## Motivation
 
-The primary gender inference pipeline (gender-guesser + genderize.io) fails to classify approximately 40% of author names in the dataset, primarily due to:
+The primary gender inference pipeline (gender-guesser + Groq LLM) achieves 98.4% classification coverage of previously unresolved author names. The remaining ~1.6% of names fail to classify due to:
 
 - Non-Latin script names (Cyrillic, Greek, etc.)
 - Names with diacritical marks (Eastern European, Iberian, Scandinavian)

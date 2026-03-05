@@ -145,9 +145,8 @@
   "recommendations_for_future_work": [
     "Manual review of 6,391 remaining cases for critical research",
     "Implement confidence scoring for stricter classification thresholds",
-    "Combine LLM with name-lookup databases (e.g., Genderize.io) for hybrid approach",
     "Language detection and language-specific models for non-English names",
     "Iterative refinement using researcher feedback",
-    "Integration with external gender classification APIs for validation"
+    "Integration with additional name classification services for validation"
   ]
 }
