@@ -32,19 +32,15 @@ print(f"✓ Loaded gender cache with {len(gi.cache)} entries\n")
 print("Loading paper data...")
 bio_df = pd.read_csv("data/processed/pubmed_biology_2015_2025.csv")
 comp_df = pd.read_csv("data/processed/pubmed_compbio_2015_2025.csv")
-qbio_df = pd.read_csv("data/processed/arxiv_qbio_2015_2025.csv")
-cs_df = pd.read_csv("data/processed/arxiv_cs_2015_2025.csv")
 
 pubmed_df = pd.concat([bio_df, comp_df], ignore_index=True)
-arxiv_df = pd.concat([qbio_df, cs_df], ignore_index=True)
 
-print(f"✓ Loaded {len(pubmed_df)} PubMed papers")
-print(f"✓ Loaded {len(arxiv_df)} arXiv papers\n")
+print(f"✓ Loaded {len(pubmed_df)} PubMed papers\n")
 
 # Extract unique author names and infer gender
 print("Inferring gender for unique authors...")
 
-all_dfs = [pubmed_df, arxiv_df]
+all_dfs = [pubmed_df]
 unique_authors = set()
 
 for df in all_dfs:
@@ -107,43 +103,6 @@ for idx, row in pubmed_df.iterrows():
 
 db.batch_insert_positions(pubmed_positions)
 print(f"✓ Processed {len(pubmed_df)} PubMed papers\n")
-
-# Process arXiv papers
-print("Processing arXiv papers...")
-if len(arxiv_df) == 0:
-    print("⚠️  No arXiv data to process (fetch returned 0 preprints)\n")
-else:
-    arxiv_positions = []
-
-    for idx, row in arxiv_df.iterrows():
-        arxiv_id = row.get("arxiv_id")
-        year = row["year"]
-        dataset = row["dataset"]
-        positions = (
-            eval(row["positions"])
-            if isinstance(row["positions"], str)
-            else row["positions"]
-        )
-
-        # Insert paper
-        paper_id = db.insert_paper(
-            pmid=arxiv_id, title=row.get("title", ""), year=year, dataset=dataset
-        )
-
-        # Insert author positions
-        for author, position in positions:
-            arxiv_positions.append(
-                {
-                    "pmid": arxiv_id,
-                    "year": year,
-                    "dataset": dataset,
-                    "author": author,
-                    "position": position,
-                }
-            )
-
-    db.batch_insert_positions(arxiv_positions)
-    print(f"✓ Processed {len(arxiv_df)} arXiv papers\n")
 
 # Save gender cache
 print(f"Saving gender cache ({len(gi.cache)} entries)...")
