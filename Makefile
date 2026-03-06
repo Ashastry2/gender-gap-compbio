@@ -1,4 +1,4 @@
-.PHONY: help setup install fetch infer classify preprocess-journals analyze figures run clean docker-build docker-run docker-shell docker-push
+.PHONY: help setup install download-zenodo fetch infer classify preprocess-journals analyze figures run run-quick clean docker-build docker-run docker-shell docker-clean
 
 # Variables
 DOCKER_IMAGE = gender-gap-compbio
@@ -13,6 +13,7 @@ help:
 	@echo "Setup & Installation:"
 	@echo "  make setup              - One-time setup (venv, dependencies, .env)"
 	@echo "  make install            - Install Python dependencies"
+	@echo "  make download-zenodo    - Download archived data from Zenodo (quick reproduction)"
 	@echo ""
 	@echo "Pipeline Commands:"
 	@echo "  make fetch              - Fetch PubMed data (2015-2025)"
@@ -77,6 +78,11 @@ setup:
 install:
 	$(PYTHON) -m pip install --upgrade pip
 	$(PYTHON) -m pip install -r requirements.txt
+
+download-zenodo:
+	@echo "Downloading archived data from Zenodo..."
+	@echo "Record: https://zenodo.org/records/18894714"
+	$(PYTHON) scripts/download_zenodo_data.py
 
 # ============================================================================
 # PIPELINE COMMANDS

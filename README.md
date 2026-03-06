@@ -13,6 +13,30 @@ This project extends the Bonham & Stefan (2017) analysis of gender representatio
 2. **LinkedIn article** (400–600 words)
 3. **GitHub repository** with reproducible code and methodology
 
+## Data Availability
+
+**Complete datasets for this analysis are archived on Zenodo:**
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18894714.svg)](https://doi.org/10.5281/zenodo.18894714)
+
+- **Zenodo Record:** https://zenodo.org/records/18894714
+- **DOI:** 10.5281/zenodo.18894714
+
+### Archive Contents
+
+The Zenodo archive includes:
+- `pubmed_biology_2015_2025.csv` (210 MB) — Biology papers from PubMed
+- `pubmed_compbio_2015_2025.csv` (40 MB) — Computational biology papers
+- `gender_data.db.gz` (285 MB, compressed) — SQLite database with inferred gender data
+- `scimagojr_2024_archived.csv` (11 MB) — Journal impact quartiles (snapshot)
+- Analysis outputs and supplementary results
+
+### Using the Archived Data
+
+For faster reproduction without API calls, download the data from Zenodo and extract to your local repository (see [Reproducibility with Archived Data](#reproducibility-with-archived-data) below).
+
+---
+
 ## Key Questions
 
 - Has the female first-author rate in computational biology changed since 2017?
@@ -112,6 +136,36 @@ make docker-run ENTREZ_EMAIL=your.email@example.com
 ```
 
 See [DOCKER.md](DOCKER.md) for full Docker documentation, including `docker-compose` usage and development workflows.
+
+### Reproducibility with Archived Data
+
+For the fastest reproduction (30-45 minutes), use the pre-built datasets from Zenodo:
+
+**Option A: Automated Download (Recommended)**
+```bash
+# Download and extract files automatically
+python scripts/download_zenodo_data.py
+
+# Or using bash
+bash scripts/download_zenodo_data.sh
+```
+
+**Option B: Manual Download**
+```bash
+# Visit: https://zenodo.org/records/18894714
+# Download the files and extract to your repository:
+cp pubmed_*.csv data/processed/
+gunzip -c gender_data.db.gz > data/gender_data.db
+cp scimagojr_*.csv local/
+```
+
+**Run Analysis Immediately (No API calls needed)**
+```bash
+python cli.py analyze
+python cli.py figures
+```
+
+This approach skips the 2-4 hour PubMed fetch and 30-minute inference steps, enabling immediate reproduction of the published results.
 
 #### Local Installation
 
@@ -379,6 +433,10 @@ If you use this project or methodology, please cite:
 ```
 Faller, L. (2026). Gender Representation in Computational Biology: A 2025 Update.
 Available at: https://github.com/yourusername/gender-gap-compbio
+
+Archived datasets:
+Faller, L. (2026). Gender Gap in Computational Biology: Complete Dataset (2015-2025).
+Zenodo. https://doi.org/10.5281/zenodo.18894714
 ```
 
 ---
