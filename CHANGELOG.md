@@ -73,6 +73,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Dead genderize.io code from `src/gender_utils.py` — never used in actual pipeline (Groq LLM is Tier 2)
 
 ### Fixed
+- **arXiv File References:** Removed stale arXiv data loading code from `run_gender_inference_db.py`
+  - Removed attempts to load non-existent `arxiv_qbio_2015_2025.csv` and `arxiv_cs_2015_2025.csv` files
+  - Removed arXiv processing block that was left over after arXiv integration removal
+  - Script now processes PubMed data only, matching actual data availability
+  - Fixes critical FileNotFoundError blocker that prevented pipeline execution
+  - Resolves reproducibility issue identified in REPRODUCIBILITY_ASSESSMENT.md
 - **Reproducibility:** Critical filename mismatch in `run_gender_inference_db.py`
   - Changed hardcoded `2015_2024.csv` to `2015_2025.csv` to match `cli.py` output
   - Pipeline would have failed at step 2 (database population) with "file not found" error
