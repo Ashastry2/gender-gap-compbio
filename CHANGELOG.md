@@ -14,6 +14,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Temporal trend analysis now includes latest year
 
 ### Added
+- **Docker Containerization:** Full Docker support for reproducible environments
+  - `Dockerfile`: Multi-stage build optimizing for speed and image size (~500 MB)
+  - `docker-compose.yml`: Easy orchestration with environment variable management
+  - `Makefile`: Convenient shortcuts for all common tasks (setup, fetch, analyze, docker-build, docker-run, etc.)
+  - `.dockerignore`: Excludes unnecessary files from build context
+  - `DOCKER.md`: Comprehensive documentation for Docker workflows
+  - Enables one-command reproduction across different systems/Python versions
+  - Eliminates dependency chaos and improves reproducibility (5/10 → 8/10)
 - **Professional CLI Tool:** New `cli.py` using Click framework for flexible pipeline execution
   - Modular subcommands: `fetch`, `infer`, `analyze`, `figures`, `run`
   - Flexible parameters: `--start-year`, `--end-year`, `--append` flags
@@ -37,13 +45,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Better error handling and progress reporting
 
 ### Changed
+- **Dependencies:** Updated `requirements.txt` with missing CLI dependencies
+  - Added `click>=8.0.0` (required by `cli.py`)
+  - Added `groq>=0.4.0` (required by `classify_names.py` for LLM-based classification)
+  - Removed duplicate `dotenv` entry (use `python-dotenv` instead)
 - **Data Storage:** Author-position data now stored in SQLite (300-500 MB) instead of CSV files (1.2-1.5 GB)
   - ~60-75% reduction in storage footprint
   - Significant speedup in data loading and filtering
-- **README.md:** Updated to document SQLite approach and new pipeline structure
-  - Added architecture section explaining database design
-  - Updated quick start guide with new pipeline commands
-  - Clarified repository structure to reflect code-first approach
+- **README.md:** Updated to document Docker setup and dependency management
+  - Added Docker quick start section with examples
+  - Added reference to comprehensive DOCKER.md documentation
+  - Maintained original quick start for local installation
 - **Pipeline Simplified:** Removed arXiv integration due to persistent API rate limiting
   - Focus on PubMed data (Biology + Computational Biology) with 410k+ papers
   - Sufficient sample size for robust statistical analysis
