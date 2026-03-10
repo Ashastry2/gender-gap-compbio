@@ -12,68 +12,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - PubMed data now includes 430,000+ papers instead of 410,000
   - COVID-19 recovery period extended to 2022–2025
   - Temporal trend analysis now includes latest year
+- **Repository Organization:** Reorganized Python scripts for clarity and maintainability
+  - Moved all utility scripts (`run_gender_inference_db.py`, `preprocess_journal_quartiles.py`, `analyze_journal_impact.py`, `classify_names_retry.py`, `analyze_gender_with_filtering.py`) to `scripts/` folder
+  - Kept only `cli.py` in root as the single main entry point
+  - Updated all documentation and CLI help to reflect new paths
+  - Follows Python project conventions for cleaner root directory
 
 ### Added
-- **Docker Containerization:** Full Docker support for reproducible environments
-  - `Dockerfile`: Multi-stage build optimizing for speed and image size (~500 MB)
-  - `docker-compose.yml`: Easy orchestration with environment variable management
-  - `Makefile`: Convenient shortcuts for all common tasks (setup, fetch, analyze, docker-build, docker-run, etc.)
-  - `.dockerignore`: Excludes unnecessary files from build context
-  - `DOCKER.md`: Comprehensive documentation for Docker workflows
-  - Enables one-command reproduction across different systems/Python versions
-  - Eliminates dependency chaos and improves reproducibility (5/10 → 8/10)
-- **Professional CLI Tool:** New `cli.py` using Click framework for flexible pipeline execution
-  - Modular subcommands: `fetch`, `infer`, `analyze`, `figures`, `run`
-  - Flexible parameters: `--start-year`, `--end-year`, `--append` flags
-  - Support for custom date ranges and incremental data updates
-  - Built-in help for each command (`python cli.py COMMAND --help`)
-  - Professional error handling and user-friendly feedback
-  - Replaces one-off scripts with unified interface
-- **SQLite Database Backend:** Replaced CSV-based storage with SQLite for better performance and scalability
-  - New `src/db_utils.py` module for database operations
-  - New `run_gender_inference_db.py` script for gender inference with database persistence
-  - Proper schema with papers, authors, and author_positions tables
-  - Indices for fast queries on year, dataset, gender, and position fields
-- **Journal Impact Analysis:** New analysis investigating gender gaps across journal quartiles
-  - `preprocess_journal_quartiles.py`: Caches ScimagoJR journal rankings using fuzzy matching (one-time preprocessing)
-  - `analyze_journal_impact.py`: Analyzes P_female by journal quartile and author position
-  - New `journals` table in SQLite for fast journal-to-quartile lookups
-  - Publication-ready figures showing female representation across Q1–Q4 journals
-- **Unified Pipeline Script:** Consolidated Jupyter notebooks into `pipeline.py` for better reproducibility
-  - Command-line interface with `--skip-fetch` and `--figures-only` options
-  - Modular step functions for each pipeline stage
-  - Better error handling and progress reporting
-
-### Changed
-- **Documentation:** Added explicit DOI links to landmark Bonham & Stefan (2017) paper
-  - All references now include direct links to https://doi.org/10.1371/journal.pcbi.1005134
-  - Improves discoverability and citation tracking across README, blog posts, source code, and docs
-- **Dependencies:** Updated `requirements.txt` with missing CLI dependencies
-  - Added `click>=8.0.0` (required by `cli.py`)
-  - Added `groq>=0.4.0` (required by `classify_names.py` for LLM-based classification)
-  - Removed duplicate `dotenv` entry (use `python-dotenv` instead)
-- **Data Storage:** Author-position data now stored in SQLite (300-500 MB) instead of CSV files (1.2-1.5 GB)
-  - ~60-75% reduction in storage footprint
-  - Significant speedup in data loading and filtering
-- **README.md:** Updated to document Docker setup and dependency management
-  - Added Docker quick start section with examples
-  - Added reference to comprehensive DOCKER.md documentation
-  - Maintained original quick start for local installation
-- **Pipeline Simplified:** Removed arXiv integration due to persistent API rate limiting
-  - Focus on PubMed data (Biology + Computational Biology) with 410k+ papers
-  - Sufficient sample size for robust statistical analysis
+- **MIT License:** Added MIT License file for open-source distribution
+  - Clarified usage rights and attribution requirements
+  - Enables broader adoption and collaboration
+- **Modular Deep Dive Figure Scripts:** Refactored blog post figure generation into independent, reproducible modules
+  - Created `publications/bwib_deep_dive/figures/` directory with separate scripts:
+    - `figure_1a_position_breakdown.py` — P(female) by author position
+    - `figure_1b_temporal_trend.py` — P(female) over time
+    - `figure_1c_pi_effect.py` — The female PI effect (PI gender stratification)
+    - `table_1_female_proportion.py` — Female proportion statistics by position
+    - `table_2_pi_effect_statistics.py` — PI effect statistics table
+  - Each script can be run independently: `python -m publications.bwib_deep_dive.figures.figure_1a_position_breakdown`
+  - Created `publications/bwib_deep_dive/figures/utils.py` with shared utilities to reduce duplication
+  - Added comprehensive [Deep Dive Figures README](publications/bwib_deep_dive/figures/README.md) with documentation
+  - Legacy wrapper (`scripts/reproduce_bonham_stefan.py`) calls all modular scripts for backward compatibility
+  - Self-contained blog post structure: `publications/bwib_deep_dive/` includes markdown, figures, and code
+- **Enhanced README:** Comprehensive documentation updates
+  - Added "Published Blog Posts" section with direct links to blog markdown and figures
+  - Documented both legacy wrapper and modular approaches for figure reproduction
+  - Updated repository structure diagram to show new organization
+  - Added section "Reproduce the BWIB Deep Dive Blog Post Figures" with examples
 
 ### Removed
-- Jupyter notebooks (notebooks/01-05) — replaced by `pipeline.py`
-- CSV output files for author-level data (now in database)
-- **arXiv data fetching** (`src/arxiv_fetcher.py` and `run_arxiv_fetch.py`)
-  - arXiv API rate limiting prevented reliable data collection
-  - PubMed sample size (410k+ papers) sufficient for analysis
-- **Legacy and non-reproducible code (reproducibility audit):**
-  - `pipeline.py` — deprecated monolithic script, superseded by `cli.py`
-  - `src/arxiv_fetcher.py` — unused in PubMed-only analysis, removed from exports
-  - `generate_gender_classification_figures.py` — used hardcoded statistics instead of reading from database
-  - Dead genderize.io code from `src/gender_utils.py` — never used in actual pipeline (Groq LLM is Tier 2)
+- **Interactive Visualizations:** Removed unused interactive HTML figures
+  - Deleted `outputs/figures/fig4_interactive_temporal_trend.html` (Plotly-based temporal trend)
+  - Deleted `outputs/figures/classification_strategy_sankey.html` (Sankey diagram)
+  - Removed `plot_interactive_temporal_trend()` function from `src/plotting.py`
+  - Removed plotly dependencies from visualization module
+- **Validation Directory:** Removed unused validation folder
+  - Deleted `validation/` directory with test data and README
+  - Not part of final reproducibility pipeline
+- **Runtime Artifacts:** Cleaned up temporary process and log files
+  - Deleted process ID files: `classify.pid`, `monitor.pid`
+  - Deleted log files: `classify_output.log`, `classify_retry.log`, `classify_run.log`, `classify_run_paid.log`
+  - Deleted monitoring script: `monitor_progress.sh`
 
 ### Fixed
 - **arXiv File References:** Removed stale arXiv data loading code from `run_gender_inference_db.py`
