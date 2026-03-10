@@ -1,0 +1,8 @@
+Dataset: Gender Gap in Computational Biology Analysis (2015-2025)
+Description: Complete datasets for reproducing the analysis
+Contents:
+- pubmed_biology_2015_2025.csv: Biology papers from PubMed
+- pubmed_compbio_2015_2025.csv: Computational biology papers
+- gender_data.db.gz: SQLite database with inferred gender data
+- scimagojr_2024_archived.csv: Journal impact quartiles (snapshot)
+- gender_cache.json: Cached gender classifications
