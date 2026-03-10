@@ -156,4 +156,10 @@ The temporal analysis tracked female representation across journal quartiles yea
 
 ---
 
+## Acknowledgments
+
+This analysis was inspired by a question from Dr. Samantha Klasfeld, whose curiosity about journal prestige turned out to reveal one of the most counterintuitive findings in the dataset. Thanks also to Amulya Shastry for her inspiring discussions that helped shape this work.
+
+---
+
 *Data through 2025 | Analysis of 1.76M author-position records across ScimagoJR 2024 journal rankings | Code available on GitHub*
