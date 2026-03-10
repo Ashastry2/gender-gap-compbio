@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- **Journal Impact Blog Post:** Enhanced clarity and consistency
+  - Added Acknowledgments section recognizing Dr. Samantha Klasfeld and Amulya Shastry
+  - Updated publication date to March 2026
+  - Aligned P_female notation and probability language with Deep Dive blog post for consistency
+  - Removed em-dashes throughout, rephrased using commas, semicolons, colons, and parentheses for improved readability
+
 ## [0.3.0] - 2026-03-10
 
 ### Changed
