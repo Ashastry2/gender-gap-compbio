@@ -194,7 +194,7 @@ Progress isn't inevitable. It's the result of people who care enough to ask ques
 
 ## How We Did This
 
-We analyzed **274,702 PubMed publications** (2015–2025) from both Biology (`"Biology"[Mesh]`) and Computational Biology (`"Computational Biology"[Majr]`) datasets. We identified **977,731 unique authors** and inferred gender using a hybrid two-tier approach:
+We analyzed **274,702 PubMed publications** (2015–2025) from both Biology (`"Biology"[Mesh]`) and Computational Biology (`"Computational Biology"[Majr]`) datasets. (Note: Unlike Bonham & Stefan, who analyzed both PubMed and arXiv, we focused on PubMed due to API limitations.) We identified **977,731 unique authors** and inferred gender using a hybrid two-tier approach:
 
 1. **Offline gender database** (gender-guesser, ~45k names)
 2. **LLM-based classification** (Groq llama-3.1-8b-instant) for remaining unknowns using batch processing with advanced JSON parsing strategies
