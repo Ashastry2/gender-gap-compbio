@@ -7,11 +7,28 @@ Replicating and extending the landmark study by [Bonham & Stefan (2017)](https:/
 
 ## Overview
 
-This project extends the [Bonham & Stefan (2017)](https://doi.org/10.1371/journal.pcbi.1005134) analysis of gender representation in computational biology through 2025, examines emerging trends (including the COVID-19 pandemic's impact), and investigates subfield-specific gender gaps. Results will be published as:
+This project extends the [Bonham & Stefan (2017)](https://doi.org/10.1371/journal.pcbi.1005134) analysis of gender representation in computational biology through 2025, examines emerging trends (including the COVID-19 pandemic's impact), and investigates subfield-specific gender gaps.
 
-1. **BWIB Deep Dive blog post** (1,200–1,800 words)
-2. **LinkedIn article** (400–600 words)
-3. **GitHub repository** with reproducible code and methodology
+## Published Blog Posts
+
+### 1. **BWIB Deep Dive: Where Do We Stand?**
+
+A comprehensive analysis replicating Bonham & Stefan (2017) with 2015-2025 data. Published in the `publications/bwib_deep_dive/` directory.
+
+**Figures (fully reproducible, modular code):**
+- [Figure 1A](publications/bwib_deep_dive/figures/figure_1a_position_breakdown.py) — P(female) by author position
+- [Figure 1B](publications/bwib_deep_dive/figures/figure_1b_temporal_trend.py) — P(female) over time
+- [Figure 1C](publications/bwib_deep_dive/figures/figure_1c_pi_effect.py) — The female PI effect
+- [Table 1](publications/bwib_deep_dive/figures/table_1_female_proportion.py) — Female proportion by position
+- [Table 2](publications/bwib_deep_dive/figures/table_2_pi_effect_statistics.py) — Female authors by PI gender
+
+Each figure can be regenerated independently or all together. See [Deep Dive Figures README](publications/bwib_deep_dive/figures/README.md) for details.
+
+### 2. **BWIB Journal Impact Analysis** (Draft)
+
+Follow-up analysis investigating whether female authors publish in lower-impact journals. Currently in proof-read phase.
+
+**Results:** [Surprising finding](publications/BWIB_Journal_Impact_Blog_Post.md) — No evidence of a journal impact gap. Female representation is consistent across all journal quartiles (Q1-Q4).
 
 ## Data Availability
 
@@ -48,6 +65,7 @@ For faster reproduction without API calls, download the data from Zenodo and ext
 
 ```
 ├── README.md
+├── LICENSE                      # MIT License
 ├── CHANGELOG.md                 # Release notes and version history
 ├── requirements.txt
 ├── .gitignore
@@ -56,6 +74,7 @@ For faster reproduction without API calls, download the data from Zenodo and ext
 ├── run_gender_inference_db.py       # Gender inference with SQLite backend
 ├── preprocess_journal_quartiles.py  # Cache journal impact rankings (run once)
 ├── analyze_journal_impact.py        # Analyze gender gaps across journal quartiles
+├── reproduce_bonham_stefan.py       # Legacy wrapper for Deep Dive figure generation
 │
 ├── data/
 │   ├── processed/               # CSV files from PubMed fetches
@@ -70,8 +89,26 @@ For faster reproduction without API calls, download the data from Zenodo and ext
 │   ├── bootstrap.py             # Statistical analysis
 │   └── plotting.py              # Figure generation
 │
+├── publications/
+│   ├── BWIB_Deep_Dive_Blog_Post.md              # Main published blog post (2015-2025 update)
+│   ├── BWIB_Journal_Impact_Blog_Post.md         # Follow-up analysis (draft)
+│   └── bwib_deep_dive/                          # Deep Dive blog post self-contained directory
+│       ├── BWIB_Deep_Dive_Blog_Post.md
+│       ├── Fig1A_position_breakdown.png
+│       ├── Fig1B_temporal_trend.png
+│       ├── Fig1C_pi_effect.png
+│       └── figures/                             # Modular, independently-runnable figure scripts
+│           ├── README.md                        # Full documentation for figure reproduction
+│           ├── __init__.py
+│           ├── utils.py                         # Shared utilities (data loading, etc.)
+│           ├── figure_1a_position_breakdown.py  # Generate Fig 1A
+│           ├── figure_1b_temporal_trend.py      # Generate Fig 1B
+│           ├── figure_1c_pi_effect.py           # Generate Fig 1C
+│           ├── table_1_female_proportion.py     # Generate Table 1
+│           └── table_2_pi_effect_statistics.py  # Generate Table 2
+│
 └── outputs/
-    └── figures/                 # Publication-ready figures
+    └── figures/                 # Publication-ready figures (analysis pipeline outputs)
 ```
 
 ## Quick Start
@@ -167,6 +204,42 @@ python cli.py figures
 
 This approach skips the 2-4 hour PubMed fetch and 30-minute inference steps, enabling immediate reproduction of the published results.
 
+### 5. Reproduce the BWIB Deep Dive Blog Post Figures
+
+The Deep Dive blog post figures are organized as **modular, independently-runnable scripts** in the [`publications/bwib_deep_dive/figures/`](publications/bwib_deep_dive/figures/) directory.
+
+**Run all figures at once (legacy wrapper):**
+```bash
+python reproduce_bonham_stefan.py
+```
+
+This generates:
+- Fig1A_position_breakdown.png
+- Fig1B_temporal_trend.png
+- Fig1C_pi_effect.png
+- Table1_proportion_female_authors.csv & .md
+- Table2_female_authors_with_female_pi.csv & .md
+
+**Or run individual figures independently:**
+```bash
+# Generate only Figure 1A
+python -m publications.bwib_deep_dive.figures.figure_1a_position_breakdown
+
+# Generate only Figure 1B
+python -m publications.bwib_deep_dive.figures.figure_1b_temporal_trend
+
+# Generate only Figure 1C
+python -m publications.bwib_deep_dive.figures.figure_1c_pi_effect
+
+# Generate only Table 1
+python -m publications.bwib_deep_dive.figures.table_1_female_proportion
+
+# Generate only Table 2
+python -m publications.bwib_deep_dive.figures.table_2_pi_effect_statistics
+```
+
+Each script is self-contained and can be modified independently. For full documentation on each figure and how to customize them, see the [Deep Dive Figures README](publications/bwib_deep_dive/figures/README.md).
+
 #### Local Installation
 
 Alternatively, run directly on your machine:
@@ -220,18 +293,15 @@ This uses the `gender-guesser` database to classify ~58% of author names offline
 After Phase 1, if you have a Groq API key, classify remaining unknown names via LLM:
 
 ```bash
-# First pass: classify unknowns using Groq API (free tier exploration)
-python classify_names.py
-
-# Second pass: retry with improved JSON parsing to recover missed names
+# Classify unknowns using Groq API (llama-3.1-8b) with robust JSON parsing
 python classify_names_retry.py
 ```
 
-These scripts classify unknown names at minimal cost (~$0.54 total). Without this step, ~1.6% of author names remain unclassified.
+This script classifies unknown names at minimal cost (~$0.54 total for ~390k names). Without this step, ~1.6% of author names remain unclassified.
 
 **How gender classification works:**
 - Tier 1 (offline): gender-guesser database (~45k Western names)
-- Tier 2 (optional): Groq LLM API (llama-3.1-8b) for remaining unknowns, with three-phase processing and robust JSON parsing
+- Tier 2 (optional): Groq LLM API (llama-3.1-8b) for remaining unknowns with robust multi-strategy JSON parsing
 
 This script:
 1. Loads paper data from CSV files
@@ -424,7 +494,18 @@ If you find issues, have suggestions for improvements, or want to extend this an
 
 ## License
 
-[Add your preferred license here — e.g., MIT, CC-BY 4.0]
+This project is licensed under the **MIT License** — see [LICENSE](LICENSE) file for details.
+
+You are free to:
+- Use, modify, and distribute this code for any purpose
+- Include it in proprietary projects
+- Distribute modified versions
+
+With the requirement that:
+- You include a copy of the license and copyright notice
+- You state significant changes made to the code
+
+For full details, see the [LICENSE](LICENSE) file.
 
 ## Citation
 
