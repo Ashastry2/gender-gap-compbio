@@ -41,7 +41,6 @@ from src.bootstrap import bootstrap_by_multiple_groups, bootstrap_pfemale
 from src.plotting import (
     plot_pfemale_by_position,
     plot_pfemale_over_time,
-    plot_interactive_temporal_trend,
 )
 import matplotlib.pyplot as plt
 
@@ -340,15 +339,6 @@ def figures():
     )
     plt.close()
     print("✓ Saved Figure 3\n")
-
-    # Figure 4: Interactive temporal trend
-    print("Generating Figure 4: Interactive temporal trend...")
-    fig = plot_interactive_temporal_trend(
-        temporal_results,
-        group_col="dataset",
-        output_path=f"{output_dir}/fig4_interactive_temporal_trend.html",
-    )
-    print("✓ Saved Figure 4\n")
 
     print("=" * 70)
     print("✓ FIGURES COMPLETE!")

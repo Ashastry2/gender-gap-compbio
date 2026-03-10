@@ -10,8 +10,6 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import plotly.graph_objects as go
-import plotly.express as px
 
 
 # Set default plotting style
@@ -197,42 +195,6 @@ def plot_female_pi_effect(
         print(f"Saved figure to {output_path}")
 
     return fig, ax
-
-
-def plot_interactive_temporal_trend(
-    df: pd.DataFrame,
-    group_col: str = "dataset",
-    output_path: str = None
-) -> go.Figure:
-    """
-    Interactive Plotly line plot of P_female over time.
-
-    Args:
-        df: DataFrame with columns: year, mean, ci_lower, ci_upper, dataset
-        group_col: Column to group by
-        output_path: Path to save HTML (optional)
-
-    Returns:
-        Plotly Figure object
-    """
-    fig = px.line(
-        df,
-        x="year",
-        y="mean",
-        color=group_col,
-        markers=True,
-        title="Female Representation in Authorship Over Time",
-        labels={"year": "Year", "mean": "P(Female)", group_col: "Dataset"}
-    )
-
-    fig.update_yaxes(range=[0, 1])
-    fig.update_layout(hovermode="x unified")
-
-    if output_path:
-        fig.write_html(output_path)
-        print(f"Saved interactive figure to {output_path}")
-
-    return fig
 
 
 def plot_pfemale_by_journal_quartile(
