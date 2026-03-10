@@ -97,7 +97,7 @@ This is one of the most striking findings from Bonham & Stefan: papers with a fe
 - In **biology** papers with a male last author, first author is 44.5% female; with a female last author, it jumps to **57.5%** (a **13 percentage point increase**)
 - In **computational biology** papers with a male last author, first author is 37.8% female; with a female last author, it jumps to **51.6%** (a **13.8 percentage point increase**)
 
-This is remarkable and hopeful: women in senior positions in both fields are actively bringing other women into visible authorship roles. This aligns with findings from other studies (e.g., [Macaluso et al. 2016](https://doi.org/10.1097/ACM.0000000000001261)) showing that female corresponding/last authors tend to have more equitable co-authorship practices across roles.
+This is remarkable and hopeful: women in senior positions in both fields are actively bringing other women into visible authorship roles. This "female PI effect"—the pattern we documented in our analysis—suggests that women in leadership positions actively support and elevate other women in visible authorship roles.
 
 ---
 
