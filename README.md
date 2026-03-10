@@ -115,7 +115,7 @@ For faster reproduction without API calls, download the data from Zenodo and ext
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/gender-gap-compbio.git
+git clone https://github.com/lfaller/gender-gap-compbio.git
 cd gender-gap-compbio
 ```
 
@@ -513,7 +513,7 @@ If you use this project or methodology, please cite:
 
 ```
 Faller, L. (2026). Gender Representation in Computational Biology: A 2025 Update.
-Available at: https://github.com/yourusername/gender-gap-compbio
+Available at: https://github.com/lfaller/gender-gap-compbio
 
 Archived datasets:
 Faller, L. (2026). Gender Gap in Computational Biology: Complete Dataset (2015-2025).
