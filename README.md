@@ -70,11 +70,17 @@ For faster reproduction without API calls, download the data from Zenodo and ext
 ├── requirements.txt
 ├── .gitignore
 │
-├── cli.py                           # Professional CLI tool (Click-based) — RECOMMENDED
-├── run_gender_inference_db.py       # Gender inference with SQLite backend
-├── preprocess_journal_quartiles.py  # Cache journal impact rankings (run once)
-├── analyze_journal_impact.py        # Analyze gender gaps across journal quartiles
-├── reproduce_bonham_stefan.py       # Legacy wrapper for Deep Dive figure generation
+├── cli.py                           # Professional CLI tool (Click-based) — MAIN ENTRY POINT
+│
+├── scripts/
+│   ├── run_gender_inference_db.py       # Gender inference with SQLite backend
+│   ├── preprocess_journal_quartiles.py  # Cache journal impact rankings (run once)
+│   ├── analyze_journal_impact.py        # Analyze gender gaps across journal quartiles
+│   ├── reproduce_bonham_stefan.py       # Legacy wrapper for Deep Dive figure generation
+│   ├── classify_names_retry.py          # Retry classification for unknown author names
+│   ├── analyze_gender_with_filtering.py # Gender analysis with filtering
+│   ├── download_zenodo_data.py          # Download pre-built datasets from Zenodo
+│   └── download_zenodo_data.sh          # Bash version of Zenodo downloader
 │
 ├── data/
 │   ├── processed/               # CSV files from PubMed fetches
@@ -182,9 +188,6 @@ For the fastest reproduction (30-45 minutes), use the pre-built datasets from Ze
 ```bash
 # Download and extract files automatically
 python scripts/download_zenodo_data.py
-
-# Or using bash
-bash scripts/download_zenodo_data.sh
 ```
 
 **Option B: Manual Download**
@@ -210,7 +213,7 @@ The Deep Dive blog post figures are organized as **modular, independently-runnab
 
 **Run all figures at once (legacy wrapper):**
 ```bash
-python reproduce_bonham_stefan.py
+python scripts/reproduce_bonham_stefan.py
 ```
 
 This generates:
@@ -274,7 +277,7 @@ python cli.py analyze --help
 
 **Workflow with CLI:**
 1. `python cli.py fetch --start-year 2015 --end-year 2025` (fetch PubMed data)
-2. `python run_gender_inference_db.py` (infer gender for unique authors)
+2. `python scripts/run_gender_inference_db.py` (infer gender for unique authors)
 3. `python cli.py analyze` (run statistical analysis)
 4. `python cli.py figures` (generate publication-ready figures)
 
@@ -284,7 +287,7 @@ The gender inference pipeline has two phases:
 
 **Phase 1: Offline classification**
 ```bash
-python run_gender_inference_db.py
+python scripts/run_gender_inference_db.py
 ```
 This uses the `gender-guesser` database to classify ~58% of author names offline.
 
@@ -294,7 +297,7 @@ After Phase 1, if you have a Groq API key, classify remaining unknown names via 
 
 ```bash
 # Classify unknowns using Groq API (llama-3.1-8b) with robust JSON parsing
-python classify_names_retry.py
+python scripts/classify_names_retry.py
 ```
 
 This script classifies unknown names at minimal cost (~$0.54 total for ~390k names). Without this step, ~1.6% of author names remain unclassified.
@@ -315,10 +318,10 @@ To analyze whether female authors publish in lower-impact journals:
 
 ```bash
 # Step 1: Cache journal quartiles from ScimagoJR (one-time only, ~10-15 minutes)
-python preprocess_journal_quartiles.py
+python scripts/preprocess_journal_quartiles.py
 
 # Step 2: Run journal impact analysis (uses cached data, ~10-15 minutes)
-python analyze_journal_impact.py
+python scripts/analyze_journal_impact.py
 ```
 
 This analysis:
