@@ -73,24 +73,24 @@ This is one of the most striking findings from Bonham & Stefan: papers with a fe
 
 | Dataset | Position | PI Gender | Mean | 95% CI Lower | 95% CI Upper |
 |---------|----------|-----------|------|-------------|-------------|
-| **Biology** |
-| first | Male | 0.445 | 0.440 | 0.449 |
-| first | Female | **0.575** | 0.569 | 0.582 |
-| second | Male | 0.425 | 0.421 | 0.429 |
-| second | Female | **0.527** | 0.521 | 0.533 |
-| other | Male | 0.405 | 0.403 | 0.407 |
-| other | Female | **0.484** | 0.481 | 0.487 |
-| penultimate | Male | 0.296 | 0.292 | 0.301 |
-| penultimate | Female | **0.385** | 0.379 | 0.391 |
-| **Computational Biology** |
-| first | Male | 0.378 | 0.372 | 0.384 |
-| first | Female | **0.516** | 0.505 | 0.528 |
-| second | Male | 0.383 | 0.377 | 0.390 |
-| second | Female | **0.484** | 0.472 | 0.495 |
-| other | Male | 0.379 | 0.376 | 0.382 |
-| other | Female | **0.451** | 0.446 | 0.456 |
-| penultimate | Male | 0.257 | 0.251 | 0.263 |
-| penultimate | Female | **0.332** | 0.320 | 0.344 |
+| **Biology** | | | | | |
+| Biology | first | Male | 0.445 | 0.440 | 0.449 |
+| Biology | first | Female | **0.575** | 0.569 | 0.582 |
+| Biology | second | Male | 0.425 | 0.421 | 0.429 |
+| Biology | second | Female | **0.527** | 0.521 | 0.533 |
+| Biology | other | Male | 0.405 | 0.403 | 0.407 |
+| Biology | other | Female | **0.484** | 0.481 | 0.487 |
+| Biology | penultimate | Male | 0.296 | 0.292 | 0.301 |
+| Biology | penultimate | Female | **0.385** | 0.379 | 0.391 |
+| **Comp Bio** | | | | | |
+| Comp Bio | first | Male | 0.378 | 0.372 | 0.384 |
+| Comp Bio | first | Female | **0.516** | 0.505 | 0.528 |
+| Comp Bio | second | Male | 0.383 | 0.377 | 0.390 |
+| Comp Bio | second | Female | **0.484** | 0.472 | 0.495 |
+| Comp Bio | other | Male | 0.379 | 0.376 | 0.382 |
+| Comp Bio | other | Female | **0.451** | 0.446 | 0.456 |
+| Comp Bio | penultimate | Male | 0.257 | 0.251 | 0.263 |
+| Comp Bio | penultimate | Female | **0.332** | 0.320 | 0.344 |
 
 **The Female PI Effect: Quantified**
 
