@@ -199,7 +199,7 @@ Progress isn't inevitable. It's the result of people who care enough to ask ques
 
 ## Acknowledgments
 
-This work grew out of conversations with BWIB's Advocacy Committee, and I'm grateful to Dr. Samantha Klasfeld and Amulya Shastry for their enthusiasm and early input that helped shape this analysis. Thanks also to the broader BWIB community, whose questions and energy are the reason this kind of work is worth doing.
+This work grew out of conversations with [BWIB's Advocacy Committee](https://boston-wib.org/about/committees/advocacy), and I'm grateful to [Dr. Samantha Klasfeld](https://www.linkedin.com/in/samantha-klasfeld/) and [Amulya Shastry](https://www.linkedin.com/in/amulya-shastry/) for their enthusiasm and early input that helped shape this analysis. Thanks also to the broader BWIB community, whose questions and energy are the reason this kind of work is worth doing.
 
 ---
 
