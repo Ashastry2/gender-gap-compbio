@@ -112,11 +112,14 @@ When I analyzed 274,702 PubMed papers and 977,731 unique authors from 2015–202
 That's roughly **10 times the pace Bonham and Stefan observed** in earlier decades.
 
 Here's the year-by-year breakdown:
-- 2015: 37.3%
-- 2018: 38.1%
-- 2020 (pandemic year): 39.9%
-- 2023: 41.1%
-- 2025: 42.3%
+
+| Year | Female Representation |
+|------|----------------------|
+| 2015 | 37.3% |
+| 2018 | 38.1% |
+| 2020 | 39.9% |
+| 2023 | 41.1% |
+| 2025 | 42.3% |
 
 This is meaningful progress. But let me be precise about what it represents: the 37.3%–42.3% trend is a **weighted probability** (P_female) combining all positions together, weighted by their frequency. Figure 1A shows the **unweighted** probabilities for each individual position. We'll examine both throughout this analysis, since they tell complementary stories about representation.
 
@@ -124,11 +127,13 @@ This is meaningful progress. But let me be precise about what it represents: the
 
 When I break down female representation by author position for 2015–2025:
 
-- **First authors: 45.4%** female
-- **Second authors: 43.7%** female
-- **Middle authors: 41.3%** female
-- **Penultimate authors: 30.8%** female
-- **Last authors: 30.9%** female
+| Author Position | Female Representation |
+|-----------------|----------------------|
+| First | 45.4% |
+| Second | 43.7% |
+| Middle | 41.3% |
+| Penultimate | 30.8% |
+| Last | 30.9% |
 
 The pattern is striking: female representation drops sharply in the last two author positions. If last authorship is a proxy for being the senior investigator (PI), this means that women are underrepresented in senior leadership positions in computational biology. Still.
 
